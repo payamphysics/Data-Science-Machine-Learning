@@ -1,0 +1,16 @@
+
+Three versions of the solution are as follows:
+
+- Training set unbalanced according to the target label (Survived), and the rows with null values (in any column, except Embarked, where null is identfied as a level and is replaced with a number) are removed from the trainingand test set.
+
+- Training set balanced according to the target label (Survived), and the rows with null values in any column (except Embarked, where null is identfied as a level and is replaced with a number) are removed from the trainingand test set.
+
+- Training set balanced according to the target label (Survived), and the null values in any column (except Embarked, where null is identfied as a level and is replaced with a number) are replaced with the average of that column.
+
+
+The success rate is improved when the train set is balanced according to the target label (Survived), from around 88% to around 90%. Keeping the null values (by replacing them with averages) improves this to around 95%. The last version is supperior not only in its succes rate, but also in that it keeps all the observations (rows) in the test set and so provides predictions for all of it, and not just part of it, as in the first two versions.
+
+When I substituted my own normalization (scaling to [0,1]) with the following, the success rate was increased to
+100%. But the parameters suggested by the GridSearch were no good. With those the success rate was really low (87%).
+
+data_train_bal[['Age','SibSp','Parch','Fare']] = preprocessing.normalize(data_train_bal[['Age','SibSp','Parch','Fare']])
